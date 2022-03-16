@@ -6,30 +6,34 @@
 //
 
 import XCTest
+@testable import TestDemo
+
 
 class TestDemoTests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        
+        try super.tearDownWithError()
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func testLowestVolumeShouldBeZero() {
+        let sut = ViewController()
+        sut.setVolume(value: -100)
+        
+        let volume = sut.volume
+        XCTAssert(volume == 0, "Lowest value should be equal 0")
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testHighestVolumeShouldBe100() {
+        let sut = ViewController()
+        sut.setVolume(value: 200)
+        
+        let volume = sut.volume
+        XCTAssert(volume == 100, "Hihest value should be equal 100")
     }
 
 }
